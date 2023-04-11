@@ -1,3 +1,4 @@
+<!-- NUEVO -->
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -26,7 +27,25 @@
                 </header>
             @endif
 
-            @include('layouts.navigation')
+            <nav x-data="{ open: false }" class="bg-white border-b border-gray-100 shadow">
+                <!-- Primary Navigation Menu -->
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex justify-between h-16">
+                        <div class="flex">
+                        </div>
+            
+                        <!-- Settings Dropdown -->
+                        <div class="hidden sm:flex sm:items-center sm:ml-6">
+                            @auth
+                                <a href="{{ url('/dashboard') }}" class="font-semibold text-gray-800 hover:text-gray-500">Admin</a>
+                            @else
+                                <a href="{{ route('login') }}" class="font-semibold text-gray-800 hover:text-gray-500">Iniciar Sesión</a>
+                            @endauth
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            
 
             <!-- Page Content -->
             <main>
