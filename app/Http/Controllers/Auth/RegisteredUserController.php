@@ -15,6 +15,11 @@ use Illuminate\View\View;
 
 class RegisteredUserController extends Controller
 {
+    public function index()
+    {
+        return view('profile.add-account');
+    }
+
     /**
      * Display the registration view.
      */
@@ -42,10 +47,15 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        event(new Registered($user));
-
-        Auth::login($user);
-
-        return redirect(RouteServiceProvider::HOME);
+        if(auth()->user()) //Si el usuario esta logeado
+        {
+            event(new Registered($user));
+            return back()->with('status', 'account-created');
+        } 
+        else 
+        {
+            Auth::login($user);
+            return redirect(RouteServiceProvider::HOME);
+        }
     }
 }

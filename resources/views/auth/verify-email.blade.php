@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Verficar email
+    Verificar email
 @endsection
 
 @section('content')
