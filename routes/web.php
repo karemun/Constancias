@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\SignatureController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -17,7 +18,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('guest')->group(function () {
+    //Pagina principal
     Route::get('/', function () { return view('index'); });
+
+    //Registrar evento
+    Route::get('/registrar-evento', [EventController::class, 'index'])->name('event.index');
+    Route::post('/registrar-evento', [EventController::class, 'store'])->name('event.store');
 });
 
 Route::get('/dashboard', function () {

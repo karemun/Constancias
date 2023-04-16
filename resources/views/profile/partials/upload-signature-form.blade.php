@@ -13,8 +13,8 @@
         @csrf
 
         <x-input-label for="imagen" :value="__('Firma Electronica')" />
-        <input id="imagen" name="imagen" type="file" accept=".jpg, .jpeg, .png" class="mt-1 block w-full border p-3 rounded-lg"/>
-        <x-input-error class="mt-2" :messages="$errors->get('imagen')" />
+        <input id="imagen" name="imagen" type="file" accept=".jpg, .jpeg, .png" class="mt-1 block w-full border p-3 rounded-lg" required/>
+        <x-input-error class="mt-2" :messages="$errors->get('signatures')" />
 
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('Guardar') }}</x-primary-button>

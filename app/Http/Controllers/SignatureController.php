@@ -16,6 +16,10 @@ class SignatureController extends Controller
     
     public function store(Request $request)
     {
+        $request->validate([
+            'signatures' => 'required'
+        ]);
+
         $imagen = $request->file('imagen'); //Obtiene la imagen
         $nombreImagen = Str::uuid() . "." . $imagen->extension(); //Genera ID unico para la imagen y agrega extension
         $imagenServidor = Image::make($imagen); //Se procesa con InterventionImage
