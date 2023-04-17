@@ -11,18 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('events', function (Blueprint $table) {
+        Schema::create('solicitantes', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
             $table->string('email');
-            $table->string('evento');
-            $table->string('tipo');
-            $table->string('departamento');
-            $table->string('ubicacion');
-            $table->timestamp('fecha_inicio');
-            $table->timestamp('fecha_final');
-            $table->text('material');
-            $table->string('folio')->nullable()->unique();
+            $table->foreignId('evento_id')->constrained()->onDelete('cascade'); //Si se borra el evento, el solicitante tambien tambien
             $table->timestamps();
         });
     }
@@ -32,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('events');
+        Schema::dropIfExists('solicitantes');
     }
 };

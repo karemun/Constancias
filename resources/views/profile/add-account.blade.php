@@ -63,6 +63,13 @@
                         >{{ __('Se creo la cuenta correctamente.') }}</p>
                     @endif
                 </div>
+
+                <div class="mt-8">
+                    <p class="mt-1 text-sm text-gray-600">
+                        Advertencia: al crear una cuenta nueva, esta tendra los mismos privilegios que el perfil actual.
+                    </p>
+                </div>
+
             </form>
         </div>
     </div>

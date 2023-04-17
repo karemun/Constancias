@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\RegisteredUserController;
-use App\Http\Controllers\EventController;
+use App\Http\Controllers\EventoController;
 use App\Http\Controllers\SignatureController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -17,15 +17,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//RUTAS PARA EL USUARIO
 Route::middleware('guest')->group(function () {
     //Pagina principal
     Route::get('/', function () { return view('index'); });
 
     //Registrar evento
-    Route::get('/registrar-evento', [EventController::class, 'index'])->name('event.index');
-    Route::post('/registrar-evento', [EventController::class, 'store'])->name('event.store');
+    Route::get('/registrar-evento', [EventoController::class, 'index'])->name('evento.index');
+    Route::post('/registrar-evento', [EventoController::class, 'store'])->name('evento.store');
 });
 
+//RUTAS PARA EL PERFIL
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

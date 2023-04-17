@@ -12,6 +12,7 @@
         @stack('styles')
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @livewireStyles
     </head>
 
     <body class="font-sans antialiased">
@@ -103,5 +104,7 @@
                 Universidad de Guadalajara {{ now()->year }}
             </footer>
         </div>
+        @stack('script')
+        @livewireScripts
     </body>
 </html>
