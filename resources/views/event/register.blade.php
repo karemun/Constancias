@@ -93,7 +93,7 @@
         </div>
     </div>
 
-    <!-- Con Ajax -->
+    <!-- Script Ajax -->
     <div class="container">
         <div class="w-10/12 mx-auto mt-10 px-6 py-4 pb-10 bg-white shadow-md overflow-hidden sm:rounded-lg">
             <h2 class="font-bold text-center text-xl mt-5 mb-10 text-gray-600">
@@ -133,15 +133,19 @@
                     <tr class="bg-white border-b border-slate-200 clone-row">
                         <td class="px-6 py-4">
                             <input type="text" name="nombre_p[]" class="bg-gray-50 border border-slate-300 text-slate-900 text-sm rounded-lg block w-full" placeholder="Nombre del participante" required>
+                            <x-input-error :messages="$errors->get('nombre_p')" class="mt-2" />
                         </td>
                         <td class="px-6 py-4">
                             <input type="text" name="rol_p[]" class="bg-gray-50 border border-slate-300 text-slate-900 text-sm rounded-lg block w-full" placeholder="Rol del participante" required>
+                            <x-input-error :messages="$errors->get('rol_p')" class="mt-2" />
                         </td>
                         <td class="px-6 py-4">
                             <input type="text" name="actividad_p[]" class="bg-gray-50 border border-slate-300 text-slate-900 text-sm rounded-lg block w-full" placeholder="Actividad que realizara" required>
+                            <x-input-error :messages="$errors->get('actividad_p')" class="mt-2" />
                         </td>
                         <td class="px-6 py-4">
                             <input type="text" name="puesto_p[]" class="bg-gray-50 border border-slate-300 text-slate-900 text-sm rounded-lg block w-full" placeholder="Puesto del participante" required>
+                            <x-input-error :messages="$errors->get('puesto_p')" class="mt-2" />
                         </td>
                         <td class="px-6 py-4">
                             <input type="text" name="codigo_p[]" class="bg-gray-50 border border-slate-300 text-slate-900 text-sm rounded-lg block w-full" placeholder="Codigo de UDG">
@@ -169,6 +173,7 @@
 
 @endsection
 
+<!-- Script Ajax -->
 @push('script')
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script>

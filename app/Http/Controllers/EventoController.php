@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Mail\MyEmail;
 use App\Models\Evento;
 use App\Models\Solicitante;
 use App\Models\Participante;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class EventoController extends Controller
 {
@@ -18,8 +21,6 @@ class EventoController extends Controller
 
     public function store(Request $request)
     {
-        //dd($request->all());
-
         $this->code = $this->generateUniqueCode(); //Se genera numero unico
         
         //Validaciones
@@ -43,7 +44,6 @@ class EventoController extends Controller
             'rol_p' => 'required|max:50',
             'actividad_p' => 'required|max:100',
             'puesto_p' => 'required|max:50',
-            'codigo_p' => 'max:9'
         ]);
 
         //Se crea el evento
@@ -88,13 +88,20 @@ class EventoController extends Controller
             }
         }
 
-        return redirect()->route('evento.index');
+        //Se envia email a los usuarios registrados
+        $emails = User::where('email_verified_at', '!=', null)->pluck('email'); //Se obtienen los correos verificados
+        $data = $request->all();    //Se almacena la informacion enviada
+        Mail::to($emails)->send(new MyEmail('mails.solicitar-evento', 'Se solicito un nuevo evento', $data)); //Se envia correo con la informacion
+
+        return view('event.successful');
     }
 
     public function generateUniqueCode()    //Funcion que genera un numero unico aleatorio
     {
+        $letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+        
         do {
-            $folio = random_int(100000, 999999);
+            $folio = uniqid() . substr(str_shuffle($letras), 0, 5) . rand(100, 999);
         } while (Evento::where("folio", "=", $folio)->first());
         
         return $folio;
