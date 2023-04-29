@@ -93,77 +93,69 @@
         </div>
     </div>
 
-    <!-- Script Ajax -->
+    <!-- Participantes -->
     <div class="container">
         <div class="w-10/12 mx-auto mt-10 px-6 py-4 pb-10 bg-white shadow-md overflow-hidden sm:rounded-lg">
             <h2 class="font-bold text-center text-xl mt-5 mb-10 text-gray-600">
-                Datos del participante
+                Datos de participantes
             </h2>
 
-            <div class="mt-1">
-                <button type="button" class="add-select items-center mx-auto mb-5 px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700">
+            <div class="mt-5 flex justify-center">
+                <button type="button" class="clone-btn items-center mx-auto mb-12 mt-5 px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700">
                     Añadir Participante
                 </button>
             </div>
-        
-            <table class="w-full text-sm text-left text-slate-500">
-                <thead class="text-xs text-slate-700 uppercase bg-slate-50">
-                    <tr>
-                        <th scope="col" class="px-6 py-3">
-                            Nombre completo
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Rol
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Actividad
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Puesto
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Codigo (si aplica)
-                        </th>
-                        <th scope="col" class="px-6 py-3"></th>
-                    </tr>
-                </thead>
-        
-                <tbody>
-                    <!-- Primer Participante -->
-                    <tr class="bg-white border-b border-slate-200 clone-row">
-                        <td class="px-6 py-4">
-                            <input type="text" name="nombre_p[]" class="bg-gray-50 border border-slate-300 text-slate-900 text-sm rounded-lg block w-full" placeholder="Nombre del participante" required>
-                            <x-input-error :messages="$errors->get('nombre_p')" class="mt-2" />
-                        </td>
-                        <td class="px-6 py-4">
-                            <input type="text" name="rol_p[]" class="bg-gray-50 border border-slate-300 text-slate-900 text-sm rounded-lg block w-full" placeholder="Rol del participante" required>
-                            <x-input-error :messages="$errors->get('rol_p')" class="mt-2" />
-                        </td>
-                        <td class="px-6 py-4">
-                            <input type="text" name="actividad_p[]" class="bg-gray-50 border border-slate-300 text-slate-900 text-sm rounded-lg block w-full" placeholder="Actividad que realizara" required>
-                            <x-input-error :messages="$errors->get('actividad_p')" class="mt-2" />
-                        </td>
-                        <td class="px-6 py-4">
-                            <input type="text" name="puesto_p[]" class="bg-gray-50 border border-slate-300 text-slate-900 text-sm rounded-lg block w-full" placeholder="Puesto del participante" required>
-                            <x-input-error :messages="$errors->get('puesto_p')" class="mt-2" />
-                        </td>
-                        <td class="px-6 py-4">
-                            <input type="text" name="codigo_p[]" class="bg-gray-50 border border-slate-300 text-slate-900 text-sm rounded-lg block w-full" placeholder="Codigo de UDG">
-                        </td>
-                        <td class="px-6 py-4">
-                            <button type="button" class="btn-del-select add-btn inline-flex items-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700">
+
+            @if (session('mensaje'))
+                <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
+                    {{ session('mensaje') }}
+                </p>
+            @endif
+            
+            <div class="w-full text-sm text-left text-slate-500 clone-row">
+                <!-- Labels -->
+                <div class="text-xs text-slate-700 uppercase font-semibold bg-slate-50 grid grid-cols-6 gap-4 px-6 py-3">
+                    <span>Nombre completo</span>
+                    <span>Rol</span>
+                    <span>Actividad</span>
+                    <span>Puesto</span>
+                    <span>Código UDG (si aplica)</span>
+                    <span></span>
+                </div>
+            
+                <!-- Inputs -->
+                <div class="bg-white border-b border-slate-200">
+                    <div class="px-6 py-4 grid grid-cols-6 gap-4">
+                        <div>
+                            <input type="text" name="nombre_p[]" id="nombre_p[]" class="bg-gray-50 border border-slate-300 text-slate-900 text-sm rounded-lg block w-full" required>
+                        </div>
+                        <div>
+                            <input type="text" name="rol_p[]" id="rol_p[]" class="bg-gray-50 border border-slate-300 text-slate-900 text-sm rounded-lg block w-full" required>
+                        </div>
+                        <div>
+                            <input type="text" name="actividad_p[]" id="actividad_p[]" class="bg-gray-50 border border-slate-300 text-slate-900 text-sm rounded-lg block w-full" required>
+                        </div>
+                        <div>
+                            <input type="text" name="puesto_p[]" id="puesto_p[]" class="bg-gray-50 border border-slate-300 text-slate-900 text-sm rounded-lg block w-full" required>
+                        </div>
+                        <div>
+                            <input type="text" name="codigo_p[]" id="codigo_p[]" class="bg-gray-50 border border-slate-300 text-slate-900 text-sm rounded-lg block w-full"/>
+                        </div>
+                        <div>
+                            <button type="button" class="btn-del inline-flex items-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700">
                                 Eliminar
                             </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
-    <div class="mt-24 flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
-        <div class="w-full sm:max-w-md mt-2 pb-10 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
-            <x-primary-button class="w-full justify-center mt-10 bg-pink-800">
+    <div class="mt-16 flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
+        <div class="w-full sm:max-w-md mt-2 pb-10 px-6 py-4">
+            <x-primary-button class="w-full justify-center mt-10 bg-green-600 hover:bg-green-700">
                 {{ __('Solicitar Evento') }}
             </x-primary-button>
         </div>
@@ -173,17 +165,20 @@
 
 @endsection
 
-<!-- Script Ajax -->
 @push('script')
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script>
-        $('.btn-del-select').hide();
-        $(document).on('click','.add-select', function(){
-            $(this).parent().parent().find(".clone-row").clone().insertAfter($(this).parent()).removeClass("clone-row");
-            $('.btn-del-select').fadeIn();
-            $(this).parent().parent().find(".btn-del-select").click(function(e) {
-                $(this).parent().parent().remove(); 
-            });
+        $(".clone-row:first .btn-del").hide();
+
+        $(".clone-btn").on("click", function() {
+            var clone = $(".clone-row").last().clone();
+            clone.find("input").val("");
+            clone.find(".btn-del").show();
+            clone.insertAfter(".clone-row:last");
+        });
+
+        $(document).on("click", ".btn-del", function() {
+            $(this).closest(".clone-row").remove();
         });
     </script>
 @endpush

@@ -6,13 +6,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>Preparatoria 11 - @yield('title')</title>
+        <title>Prepa 11 - @yield('title')</title>
         
         <!-- Scripts -->
         @stack('styles')
-        <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-        @livewireStyles
     </head>
 
     <body class="font-sans antialiased">
@@ -21,11 +19,7 @@
             <header class="bg-udg text-white">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                     <h2 class="font-semibold text-xl text-gray-300 leading-tight">
-                        @auth
-                            <a href="{{ route('dashboard') }}">Preparatoria 11</a>
-                        @else
-                            <a href="{{ url('/') }}">Preparatoria 11</a>
-                        @endauth
+                        Preparatoria 11
                     </h2>
                 </div>
             </header>
@@ -34,7 +28,12 @@
                 <!-- Primary Navigation Menu -->
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="container mx-auto flex justify-between items-center h-16">
-                        <div class="flex"></div>
+                        
+                        <div class="hidden sm:flex sm:items-center sm:ml-6">
+                            <a href="/" class="px-3 py-2 text-gray-800 hover:text-gray-500 font-semibold mr-8">Inicio</a>
+                            <a href="/" class="px-3 py-2 duration-150 text-gray-800 hover:text-gray-500">Calendario</a>
+                        </div>
+                        
 
                         <div class="flex gap-2 items-center">
                             @auth
@@ -105,6 +104,5 @@
             </footer>
         </div>
         @stack('script')
-        @livewireScripts
     </body>
 </html>

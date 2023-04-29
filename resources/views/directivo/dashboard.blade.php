@@ -28,9 +28,11 @@
             </button>
         </div>
 
-        <button onclick="" class="bg-gray-800 hover:bg-gray-700 transition-colors cursor-pointer font-bold w-full p-3 mt-10 text-white rounded-lg"> 
-            Eventos Pendientes
-        </button>
+        <div class="w-full text-center block">
+            <a href="{{ route('directivo.evento.index') }}" class="flex items-center justify-center leading-normal bg-gray-800 hover:bg-gray-700 transition-colors cursor-pointer font-bold p-3 mt-20 text-white rounded-lg">
+                Eventos Pendientes
+            </a>
+        </div>
 
         <button onclick="" class="bg-gray-800 hover:bg-gray-700 transition-colors cursor-pointer font-bold w-full p-3 mt-10 text-white rounded-lg"> 
             Certificados Pendientes

@@ -2,108 +2,58 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Mail\PdfEmail;
 use App\Mail\MyEmail;
 use App\Models\Evento;
-use App\Models\Solicitante;
-use App\Models\Participante;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
 class EventoController extends Controller
 {
-    public $code=0;
-
     public function index()
     {
-        return view('event.register');
+        $eventos = Evento::where('auth', false)->paginate(10); //Se obtienen los eventos no autorizados y se agrega paginacion
+
+        return view('directivo.evento.pendientes', compact('eventos')); //Se envian los eventos a la vista
     }
 
-    public function store(Request $request)
+    public function show(Evento $evento)
     {
-        $this->code = $this->generateUniqueCode(); //Se genera numero unico
+        return view('directivo.evento.show', compact('evento'));
+    }
+
+    public function autorizar(Request $request, Evento $evento)
+    {
+        $data = array_merge($request->all(), $evento->toArray(), ['participantes' => $evento->participante->toArray()]);   //Se combinan los datos
+        $accion = $request->input('accion');                        //Se obtiene la accion del boton
+        $solicitante = $evento->solicitante->email;                 //Se obtiene el email del solicitante
+
         
-        //Validaciones
-        $this->validate($request, [
+        switch ($accion) {
+            //Si se autoriza el evento
+            case 'autorizar':
+                //Se autoriza y actualiza el evento
+                $evento->auth = true;
+                $evento->save();
+                
+                //Se genera el PDF
+                $pdf = PDF::loadView('pdf.evento-pdf', ['data'=>$data]);
 
-            //Validacion del solicitante
-            'nombre' => 'required|max:100',
-            'email' => 'required|email|max:100',
+                //Se envia mail con el pdf adjunto
+                Mail::to($solicitante)->send(new PdfEmail('mails.autorizar-evento', 'Autorización de Evento', $data, $pdf));
+                //$pdf->loadHTML('<h1>Test</h1>');
+                //return $pdf->stream();  //Se muestra el PDF
 
-            //Validacion del evento
-            'evento' => 'required|max:100',
-            'tipo' => 'required|max:100',
-            'departamento' => 'required|max:100',
-            'ubicacion' => 'required|max:100',
-            'fecha_inicio' => 'required',
-            'fecha_final' => 'required',
-            'material' => 'required|max:255',
+                break;
 
-            //Validacion de los participantes
-            'nombre_p' => 'required|max:100',
-            'rol_p' => 'required|max:50',
-            'actividad_p' => 'required|max:100',
-            'puesto_p' => 'required|max:50',
-        ]);
-
-        //Se crea el evento
-        Evento::create([
-            'evento' => $request->evento,
-            'tipo' => $request->tipo,
-            'departamento' => $request->departamento,
-            'ubicacion' => $request->ubicacion,
-            'fecha_inicio' => $request->fecha_inicio,
-            'fecha_final' => $request->fecha_final,
-            'material' => $request->material,
-            'folio' => $this->code,     //Almacena el numero unico
-        ]);
-
-        //Se guarda el solicitante
-        Solicitante::create([
-            'nombre' => $request->nombre,
-            'email' => $request->email,
-            'evento_id' => Evento::latest('id')->first()->id,   //Se recupera el ultimo id creado de Evento
-        ]);
-
-        //Se guardan los participantes
-        for ($i=0; $i < count($request->nombre_p); $i++) {
-            if($request->codigo_p[$i] != null) {
-                Participante::create([
-                    'nombre' => $request->nombre_p[$i],
-                    'rol' => $request->rol_p[$i],
-                    'actividad' => $request->actividad_p[$i],
-                    'puesto' => $request->puesto_p[$i],
-                    'codigo' => $request->codigo_p[$i],
-                    'evento_id' => Evento::latest('id')->first()->id,
-                ]);
-            } else {
-                Participante::create([
-                    'nombre' => $request->nombre_p[$i],
-                    'rol' => $request->rol_p[$i],
-                    'actividad' => $request->actividad_p[$i],
-                    'puesto' => $request->puesto_p[$i],
-                    'codigo' => null,
-                    'evento_id' => Evento::latest('id')->first()->id,
-                ]);
-            }
+            //Si se rechaza el evento
+            case 'rechazar':
+                Mail::to($solicitante)->send(new MyEmail('mails.rechazar-evento', 'Autorización de Evento', $data)); //Se envia email
+                $evento->delete();  //Se elimina el evento
+                break;
         }
 
-        //Se envia email a los usuarios registrados
-        $emails = User::where('email_verified_at', '!=', null)->pluck('email'); //Se obtienen los correos verificados
-        $data = $request->all();    //Se almacena la informacion enviada
-        Mail::to($emails)->send(new MyEmail('mails.solicitar-evento', 'Se solicito un nuevo evento', $data)); //Se envia correo con la informacion
-
-        return view('event.successful');
-    }
-
-    public function generateUniqueCode()    //Funcion que genera un numero unico aleatorio
-    {
-        $letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-        
-        do {
-            $folio = uniqid() . substr(str_shuffle($letras), 0, 5) . rand(100, 999);
-        } while (Evento::where("folio", "=", $folio)->first());
-        
-        return $folio;
+        return redirect()->route('directivo.evento.index')->with('mensaje', 'Se realizo la acción en el evento correctamente.'); //Se redirecciona al usuario
     }
 }

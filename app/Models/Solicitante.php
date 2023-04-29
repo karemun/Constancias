@@ -14,4 +14,9 @@ class Solicitante extends Model
         'email',
         'evento_id'
     ];
+
+    public function evento()
+    {   
+        return $this->belongsTo(Evento::class); //Pertenece a evento
+    }
 }

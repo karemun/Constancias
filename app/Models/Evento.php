@@ -20,4 +20,15 @@ class Evento extends Model
         'material',
         'folio'
     ];
+
+    //Se definen las relaciones de la BD
+    public function solicitante()
+    {
+        return $this->hasOne(Solicitante::class); //Un evento tiene un solicitante
+    }
+
+    public function participante()
+    {
+        return $this->hasMany(Participante::class); //Un evento tiene muchos participantes
+    }
 }

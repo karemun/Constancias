@@ -196,7 +196,10 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         //Intervention image
-        Intervention\Image\ImageServiceProvider::class
+        Intervention\Image\ImageServiceProvider::class,
+
+        //DomPDF
+        Barryvdh\DomPDF\ServiceProvider::class,
 
     ],
 
@@ -213,7 +216,8 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
-        'Image' => Intervention\Image\Facades\Image::class
+        'Image' => Intervention\Image\Facades\Image::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
     ])->toArray(),
 
 ];
