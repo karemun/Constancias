@@ -45,9 +45,9 @@
 
             <!-- Nombre del evento -->
             <div>
-                <x-input-label for="evento" :value="__('Nombre del evento')" />
-                <x-text-input id="evento" class="block mt-1 w-full" type="text" name="evento" :value="old('evento')" required/>
-                <x-input-error :messages="$errors->get('evento')" class="mt-2" />
+                <x-input-label for="nombre_evento" :value="__('Nombre del evento')" />
+                <x-text-input id="nombre_evento" class="block mt-1 w-full" type="text" name="nombre_evento" :value="old('nombre_evento')" required/>
+                <x-input-error :messages="$errors->get('nombre_evento')" class="mt-2" />
             </div>
 
             <!-- Tipo de evento -->
@@ -87,7 +87,7 @@
             <!-- Material para el evento -->
             <div class="mt-8">
                 <x-input-label for="material" :value="__('Material que requiera para el evento')" />
-                <textarea name="material" id="material" rows="5" placeholder="Escriba aqui los materiales" class="block mt-1 w-full rounded"></textarea>
+                <textarea name="material" id="material" rows="5" placeholder="Escriba aqui los materiales" class="block mt-1 w-full rounded">{{ old('material') }}</textarea>
                 <x-input-error :messages="$errors->get('material')" class="mt-2" />
             </div>
         </div>

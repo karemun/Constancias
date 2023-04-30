@@ -31,7 +31,7 @@ class RegistrarEventoController extends Controller
             'email' => 'required|email|max:100',
 
             //Validacion del evento
-            'evento' => 'required|max:100',
+            'nombre_evento' => 'required|max:100',
             'tipo' => 'required|max:100',
             'departamento' => 'required|max:100',
             'ubicacion' => 'required|max:100',
@@ -54,7 +54,7 @@ class RegistrarEventoController extends Controller
 
         //Se crea el evento
         Evento::create([
-            'evento' => $request->evento,
+            'nombre' => $request->nombre_evento,
             'tipo' => $request->tipo,
             'departamento' => $request->departamento,
             'ubicacion' => $request->ubicacion,
@@ -83,12 +83,8 @@ class RegistrarEventoController extends Controller
             ]);
         }
 
-        //Se envia email a los usuarios registrados
-        $data = $request->except(['_token','nombre_p', 'rol_p', 'actividad_p', 'puesto_p', 'codigo_p']); //Se obtienen los datos enviados
-        $participantes = Participante::where('evento_id', Evento::latest('id')->first()->id)->get();     //Se obtienen los participantes del evento
-        $data = array_merge($data, ['participantes' => $participantes->toArray()]);                      //Se combina el arreglo
-
-        $emails = User::where('email_verified_at', '!=', null)->pluck('email');                          //Se obtienen los correos verificados
+        $data = Evento::with('solicitante', 'participante')->latest()->first(); //Se obtiene la informacion creada
+        $emails = User::where('email_verified_at', '!=', null)->pluck('email'); //Se obtienen los correos verificados
         Mail::to($emails)->send(new MyEmail('mails.solicitar-evento', 'Se solicito un nuevo evento', $data)); //Se envia correo con la informacion
 
         return view('evento.successful');

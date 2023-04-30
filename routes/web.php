@@ -1,9 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CuentaController;
 use App\Http\Controllers\EventoController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\SignatureController;
+use App\Http\Controllers\FirmaController;
 use App\Http\Controllers\RegistrarEventoController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 
@@ -38,18 +39,22 @@ Route::middleware('auth', 'verified')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::post('/profile', [SignatureController::class, 'store'])->name('profile.signature');
+    Route::post('/profile', [FirmaController::class, 'store'])->name('profile.firma');
 
     //Agregar cuenta
     Route::get('/add-account', [RegisteredUserController::class, 'index'])->name('profile.account.index');
     Route::post('/add-account', [RegisteredUserController::class, 'store'])->name('profile.account.store');
+
+    //Perfiles Registrados
+    Route::get('/cuentas-registradas', [CuentaController::class, 'index'])->name('directivo.cuenta.index');
+    Route::delete('/cuentas-registradas/{user}', [CuentaController::class, 'destroy'])->name('directivo.cuenta.destroy');
 
     //Eventos pendientes
     Route::get('/eventos-pendientes', [EventoController::class, 'index'])->name('directivo.evento.index');
     Route::get('/evento/{evento:folio}', [EventoController::class, 'show'])->name('directivo.evento.show');
 
     //Autorizar evento
-    Route::post('/evento/{evento:folio}.pdf', [EventoController::class, 'autorizar'])->name('directivo.evento.autorizar');
+    Route::post('/evento/{evento:folio}', [EventoController::class, 'autorizar'])->name('directivo.evento.autorizar');
 });
 
 require __DIR__.'/auth.php';

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Evento: {{ $evento->evento }}
+    Evento: {{ $evento->nombre }}
 @endsection
 
 @section('content')
@@ -38,7 +38,7 @@
             <!-- Nombre del evento -->
             <div>
                 <x-input-label :value="__('Nombre del evento')" />
-                <x-text-input class="block mt-1 w-full" type="text" value="{{ $evento->evento }}" readonly/>
+                <x-text-input class="block mt-1 w-full" type="text" value="{{ $evento->nombre }}" readonly/>
             </div>
 
             <!-- Tipo de evento -->

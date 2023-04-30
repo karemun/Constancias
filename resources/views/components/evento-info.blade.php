@@ -60,7 +60,7 @@
                                             style="max-width: 100vw; padding: 32px;">
                                             <h1
                                                 style="color: #3d4852; font-size: 18px; font-weight: bold; margin-top: 0; text-align: left;">
-                                                El evento "{{ $data['evento'] }}" {{ $slot }}
+                                                El evento "{{ $data['nombre'] }}" {{ $slot }}
                                             </h1>
                                             <br>
                                             <div style="font-size: 16px; line-height: 1.5em; margin-top: 0; text-align: left;">
@@ -73,7 +73,7 @@
                                                 <table style="margin-top: 24px;">
                                                     <tr>
                                                         <td><b>Nombre:</b></td>
-                                                        <td>{{ $data['evento'] }}</td>
+                                                        <td>{{ $data['nombre'] }}</td>
                                                     </tr>
                                                     <tr>
                                                         <td><b>Tipo:</b></td>
@@ -115,7 +115,7 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        @foreach ($data['participantes'] as $participante)
+                                                        @foreach ($data['participante'] as $participante)
                                                             <tr>
                                                                 <td style="border: 1px solid #cbd5e0; padding: 8px;">{{ $participante['nombre'] }}</td>
                                                                 <td style="border: 1px solid #cbd5e0; padding: 8px;">{{ $participante['rol'] }}</td>

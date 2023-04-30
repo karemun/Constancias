@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('eventos', function (Blueprint $table) {
             $table->id();
-            $table->string('evento');
+            $table->string('nombre');
             $table->string('tipo');
             $table->string('departamento');
             $table->string('ubicacion');
@@ -21,6 +21,7 @@ return new class extends Migration
             $table->timestamp('fecha_final');
             $table->text('material');
             $table->string('folio')->nullable()->unique();
+            $table->boolean('auth')->default(false);
             $table->timestamps();
         });
     }

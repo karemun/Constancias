@@ -25,7 +25,7 @@ class EventoController extends Controller
 
     public function autorizar(Request $request, Evento $evento)
     {
-        $data = array_merge($request->all(), $evento->toArray(), ['participantes' => $evento->participante->toArray()]);   //Se combinan los datos
+        $data = array_merge($request->all(), $evento->toArray(), ['participante' => $evento->participante->toArray()]);
         $accion = $request->input('accion');                        //Se obtiene la accion del boton
         $solicitante = $evento->solicitante->email;                 //Se obtiene el email del solicitante
 

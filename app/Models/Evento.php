@@ -11,7 +11,7 @@ class Evento extends Model
 
     //Informacion que tiene que leer y procesar
     protected $fillable = [
-        'evento',
+        'nombre',
         'tipo',
         'departamento',
         'ubicacion',

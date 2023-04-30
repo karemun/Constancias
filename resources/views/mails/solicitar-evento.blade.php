@@ -7,11 +7,11 @@
         <table style="margin-top: 24px;">
             <tr>
                 <td><b>Nombre:</b></td>
-                <td>{{ $data['nombre'] }}</td>
+                <td>{{ $data['solicitante']['nombre'] }}</td>
             </tr>
             <tr>
                 <td><b>Email:</b></td>
-                <td>{{ $data['email'] }}</td>
+                <td>{{ $data['solicitante']['email'] }}</td>
             </tr>
         </table>
         <br>
