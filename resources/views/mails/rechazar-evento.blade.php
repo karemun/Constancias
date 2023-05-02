@@ -1,5 +1,5 @@
 
-<x-evento-info :data="$data" :info="true">
+<x-evento-info :data="$data" :button="false">
     NO fue AUTORIZADO
 
     <x-slot:informacion>

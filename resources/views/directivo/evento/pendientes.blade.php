@@ -22,6 +22,7 @@ Eventos Pendientes
                 <thead class="border-b bg-udg font-medium text-white dark:border-neutral-500">
                     <tr>
                         <th scope="col" class=" px-6 py-4">Folio</th>
+                        <th scope="col" class=" px-6 py-4">Evento</th>
                         <th scope="col" class=" px-6 py-4">Fecha solicitada</th>
                         <th scope="col" class=" px-6 py-4">Acción</th>
                     </tr>
@@ -29,7 +30,8 @@ Eventos Pendientes
                 <tbody class="bg-gray-200">
                     @foreach ($eventos as $evento)
                         <tr class="border-b dark:border-neutral-500">
-                            <td class="whitespace-nowrap  px-6 py-4 font-medium">#{{ $evento->folio }}</td>
+                            <td class="whitespace-nowrap  px-6 py-4">#{{ $evento->folio }}</td>
+                            <td class="whitespace-nowrap  px-6 py-4 font-medium">{{ $evento->nombre }}</td>
                             <td class="whitespace-nowrap  px-6 py-4">{{ date('d/m/Y', strtotime($evento->created_at)) }}</td>
                             <td>
                                 <a href="{{ route('directivo.evento.show', ['evento' => $evento]) }}" 

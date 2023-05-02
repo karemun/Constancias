@@ -1,5 +1,5 @@
 
-<x-evento-info :data="$data" :info="true">
+<x-evento-info :data="$data" :button="false">
     fue AUTORIZADO
     <br><br>
     Folio del evento: {{ $data['folio'] }}

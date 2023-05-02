@@ -1,11 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FirmaController;
 use App\Http\Controllers\CuentaController;
 use App\Http\Controllers\EventoController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\FirmaController;
 use App\Http\Controllers\RegistrarEventoController;
+use App\Http\Controllers\RegistrarEvidenciaController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 
 /*
@@ -27,6 +28,10 @@ Route::middleware('guest')->group(function () {
     //Registrar evento
     Route::get('/registrar-evento', [RegistrarEventoController::class, 'index'])->name('evento.index');
     Route::post('/registrar-evento', [RegistrarEventoController::class, 'store'])->name('evento.store');
+
+    //Generar evidencia
+    Route::get('/generar-constancias', [RegistrarEvidenciaController::class, 'index'])->name('evidencia.index');
+    Route::post('/generar-constancias', [RegistrarEvidenciaController::class, 'verificarFolio'])->name('evidencia.verify');
 });
 
 //RUTAS PARA EL PERFIL
@@ -42,8 +47,8 @@ Route::middleware('auth', 'verified')->group(function () {
     Route::post('/profile', [FirmaController::class, 'store'])->name('profile.firma');
 
     //Agregar cuenta
-    Route::get('/add-account', [RegisteredUserController::class, 'index'])->name('profile.account.index');
-    Route::post('/add-account', [RegisteredUserController::class, 'store'])->name('profile.account.store');
+    Route::get('/agregar-cuenta', [RegisteredUserController::class, 'index'])->name('profile.account.index');
+    Route::post('/agregar-cuenta', [RegisteredUserController::class, 'store'])->name('profile.account.store');
 
     //Perfiles Registrados
     Route::get('/cuentas-registradas', [CuentaController::class, 'index'])->name('directivo.cuenta.index');

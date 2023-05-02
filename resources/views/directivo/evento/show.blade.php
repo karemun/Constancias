@@ -147,10 +147,10 @@
         
                     <div class="mt-5">
                         <x-input-label for="observacion" :value="__('Agregar observaciones (opcional):')" />
-                        <textarea name="observacion" id="observacion" rows="5" placeholder="Escriba aqui las observaciones" class="block mt-1 w-full rounded"></textarea>
+                        <textarea name="observacion" id="observacion" rows="5" placeholder="Escribe aqui las observaciones." class="block mt-1 w-full rounded"></textarea>
                     </div>
 
-                    <x-primary-button class="w-full justify-center mt-10 bg-emerald-600 hover:bg-emerald-500" name="accion" value="autorizar" onclick="return confirm('¿Estas seguro de que quieres autorizar el evento?')">
+                    <x-primary-button class="w-full justify-center mt-10 bg-blue-600 hover:bg-blue-500" name="accion" value="autorizar" onclick="return confirm('¿Estas seguro de que quieres autorizar el evento?')">
                         {{ __('Autorizar Evento') }}
                     </x-primary-button>
 

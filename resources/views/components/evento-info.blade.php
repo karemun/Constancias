@@ -1,4 +1,4 @@
-@props(['data', 'info'])
+@props(['data', 'button'])
 <!DOCTYPE html
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -65,9 +65,7 @@
                                             <br>
                                             <div style="font-size: 16px; line-height: 1.5em; margin-top: 0; text-align: left;">
         
-                                                @if ($info)
-                                                    {{ $informacion }}
-                                                @endif
+                                                {{ $informacion }}
 
                                                 <b>Información del evento:</b>
                                                 <table style="margin-top: 24px;">
@@ -141,9 +139,13 @@
                                     <tr>
                                         <td class="content-cell" align="center"
                                             style="tive; max-width: 100vw; padding: 32px;">
+                                            @if ($button)
+                                                {{ $boton }}
+                                            @endif
                                             <p
                                                 style="line-height: 1.5em; margin-top: 0; color: #b0adc5; font-size: 12px; text-align: center;">
-                                                Fecha: {{ date('d/m/Y') }}</p>
+                                                Fecha: {{ date('d/m/Y') }}
+                                            </p>
                                         </td>
                                     </tr>
                                 </table>

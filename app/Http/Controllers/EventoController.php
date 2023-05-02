@@ -13,9 +13,9 @@ class EventoController extends Controller
 {
     public function index()
     {
-        $eventos = Evento::where('auth', false)->paginate(10); //Se obtienen los eventos no autorizados y se agrega paginacion
+        $eventos = Evento::where('auth', false)->paginate(10); //Se obtienen los eventos no autorizados
 
-        return view('directivo.evento.pendientes', compact('eventos')); //Se envian los eventos a la vista
+        return view('directivo.evento.pendientes', compact('eventos'));
     }
 
     public function show(Evento $evento)
@@ -26,12 +26,12 @@ class EventoController extends Controller
     public function autorizar(Request $request, Evento $evento)
     {
         $data = array_merge($request->all(), $evento->toArray(), ['participante' => $evento->participante->toArray()]);
-        $accion = $request->input('accion');                        //Se obtiene la accion del boton
-        $solicitante = $evento->solicitante->email;                 //Se obtiene el email del solicitante
+        $accion = $request->input('accion');        //Se obtiene la accion del boton
+        $solicitante = $evento->solicitante->email; //Se obtiene el email del solicitante
 
         
         switch ($accion) {
-            //Si se autoriza el evento
+
             case 'autorizar':
                 //Se autoriza y actualiza el evento
                 $evento->auth = true;
@@ -47,10 +47,10 @@ class EventoController extends Controller
 
                 break;
 
-            //Si se rechaza el evento
             case 'rechazar':
-                Mail::to($solicitante)->send(new MyEmail('mails.rechazar-evento', 'Autorización de Evento', $data)); //Se envia email
-                $evento->delete();  //Se elimina el evento
+                //Se envia mail y se elimina el evento
+                Mail::to($solicitante)->send(new MyEmail('mails.rechazar-evento', 'Autorización de Evento', $data));
+                $evento->delete();
                 break;
         }
 
