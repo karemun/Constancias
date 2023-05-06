@@ -19,7 +19,7 @@ class CuentaController extends Controller
     {
         //Si existe firma, la elimina
         if($user->firma) {
-            $imagen_path = public_path('firmas/' . $user->firma);
+            $imagen_path = storage_path('app/public/firmas/' . $user->firma);
             if(File::exists($imagen_path)) {
                 unlink($imagen_path);
             }

@@ -9,7 +9,7 @@
 <form method="POST" action="{{ route('evento.store') }}">
     @csrf
 
-    <div class="mt-24 flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
+    <div class="mt-16 flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
         <div class="w-full sm:max-w-md mt-2 pb-10 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
 
             <div class="container mx-auto mt-5">
@@ -153,9 +153,9 @@
         </div>
     </div>
 
-    <div class="mt-16 flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
+    <div class="mt-4 flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
         <div class="w-full sm:max-w-md mt-2 pb-10 px-6 py-4">
-            <x-primary-button class="w-full justify-center mt-10 bg-green-600 hover:bg-green-700">
+            <x-primary-button class="w-full justify-center mt-10 bg-pink-800 hover:bg-pink-900">
                 {{ __('Solicitar Evento') }}
             </x-primary-button>
         </div>

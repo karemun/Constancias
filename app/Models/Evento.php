@@ -31,4 +31,9 @@ class Evento extends Model
     {
         return $this->hasMany(Participante::class); //Un evento tiene muchos participantes
     }
+
+    public function evidencia()
+    {
+        return $this->hasMany(Evidencia::class);
+    }
 }

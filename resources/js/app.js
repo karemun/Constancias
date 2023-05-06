@@ -10,35 +10,32 @@ Dropzone.autoDiscover = false; //Desactivar auto
 
 if(document.getElementById("dropzone")) {
     
-    const dropzone = new Dropzone(".dropzone", {
-        dictDefaultMessage: "Sube aquí tu imagen",
-        acceptedFiles: ".png,.jpg,.jpeg,.gif",
+    const dropzone = new Dropzone("#dropzone", {
+        dictDefaultMessage: "Sube aquí tus archivos",
+        acceptedFiles: ".png,.jpg,.jpeg,.gif,.pdf,.doc,.docx,.ppt,.mp4,.avi,.mov,.wmv",
         addRemoveLinks: true,
         dictRemoveFile: "Borrar archivo",
-        maxFiles: 1,
-        uploadMultiple: false,
-        //Se crea cuando se inicializa dropzone
-        init: function () {
-            //Si hay algo anteriormente, 
-            if(document.querySelector('[name="imagen"]').value.trim()) {
-                const imagenPublicada= {};
-                imagenPublicada.size = 1234;
-                imagenPublicada.name = document.querySelector('[name="imagen"]').value;
-                //Se manda a llamar
-                this.options.addedfile.call(this, imagenPublicada);
-                this.options.thumbnail.call(this, imagenPublicada, `/uploads/${imagenPublicada.name}`);
-                imagenPublicada.previewElement.classList.add("dz-success", "dz-complete");
-            };
-        },
+        maxFilesize: 10,
     });
 
-    //Cuando se envia: archivo actual, respuesta 
+    var contador = 0; //Contador para los multiples archivos que se suban en la evidencia
+    
+    //Cuando se sube un archivo
     dropzone.on('success', function(file, response) {
-        //Se asigna el nombre de la imagen al valor del input de imagen en create.blade
-        document.querySelector('[name="imagen"]').value = response.imagen;
+        contador++;
+        //Se crea un input oculto y aumentara el contador
+        var input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'archivo[' + contador + ']';
+        input.value = response.archivos;
+        document.querySelector('#archivos').appendChild(input);
     })
     //Cuando se elimina
-    dropzone.on('removedfile', function() {
-        document.querySelector('[name="imagen"]').value = "";
+    dropzone.on('removedfile', function(file) {
+        var nombreArchivo = file.name;
+
+        contador--;
+        var input = document.querySelector('[name="archivo[' + (contador + 1) + ']"]');
+        input.parentNode.removeChild(input);
     })
 }

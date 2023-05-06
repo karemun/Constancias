@@ -24,7 +24,7 @@ class FirmaController extends Controller
         $nombreImagen = Str::uuid() . "." . $imagen->extension(); //Genera ID unico para la imagen y agrega extension
         $imagenServidor = Image::make($imagen); //Se procesa con InterventionImage
         $imagenServidor->fit(700,300); //Tamaño de la imagen
-        $imagenPath = public_path('firmas') . '/' . $nombreImagen; //Se crea la ruta de guardado
+        $imagenPath = storage_path('app/public/firmas') . '/' . $nombreImagen; //Se crea la ruta de guardado
         $imagenServidor->save($imagenPath); //Se guarda la imagen en el servidor
 
         //Se busca el usuario que se esta modificando

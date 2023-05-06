@@ -10,7 +10,7 @@
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                 <div class="max-w-xl">
                     <p class="text-sm font-medium text-gray-500">
-                        Se envio la solicitud del evento correctamente. Se te enviara un correo al email proporcionado en el registro cuando la solicitud haya sido aprobada.
+                        Se enviaron los datos del evento correctamente. Se te enviara un correo al email proporcionado en el registro de evento cuando los datos hayan sido aprobados.
                     </p>
                 </div>
             </div>

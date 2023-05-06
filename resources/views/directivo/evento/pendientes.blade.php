@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-Eventos Pendientes
+    Eventos Pendientes
 @endsection
 
 @section('content')

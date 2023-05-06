@@ -36,7 +36,7 @@
                             <td class="whitespace-nowrap  px-6 py-4">0</td>
                             <td class="whitespace-nowrap  px-6 py-4">
                                 @if ($user->firma)
-                                    <img src="{{ asset('firmas') . '/' . $user->firma }}" alt="Firma del perfil">
+                                    <img src="{{ asset('storage/firmas') . '/' . $user->firma }}" alt="Firma del perfil">
                                 @else
                                     No se ha subido ninguna firma
                                 @endif

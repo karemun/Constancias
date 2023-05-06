@@ -5,6 +5,7 @@ use App\Http\Controllers\FirmaController;
 use App\Http\Controllers\CuentaController;
 use App\Http\Controllers\EventoController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ArchivosController;
 use App\Http\Controllers\RegistrarEventoController;
 use App\Http\Controllers\RegistrarEvidenciaController;
 use App\Http\Controllers\Auth\RegisteredUserController;
@@ -29,9 +30,13 @@ Route::middleware('guest')->group(function () {
     Route::get('/registrar-evento', [RegistrarEventoController::class, 'index'])->name('evento.index');
     Route::post('/registrar-evento', [RegistrarEventoController::class, 'store'])->name('evento.store');
 
-    //Generar evidencia
+    //Verificar folio
     Route::get('/generar-constancias', [RegistrarEvidenciaController::class, 'index'])->name('evidencia.index');
     Route::post('/generar-constancias', [RegistrarEvidenciaController::class, 'verificarFolio'])->name('evidencia.verify');
+
+    //Subir evidencia
+    Route::post('/generar-constancias/evidencia', [RegistrarEvidenciaController::class, 'store'])->name('evidencia.store');
+    Route::post('/generar-constancias/archivos', [ArchivosController::class, 'store'])->name('evidencia.archivos.store');
 });
 
 //RUTAS PARA EL PERFIL
