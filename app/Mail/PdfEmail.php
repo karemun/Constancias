@@ -32,6 +32,6 @@ class PdfEmail extends Mailable
                     ->view($this->view)
                     ->with(['data' => $this->data, 'pdf' => $this->pdf])
                     ->attachData($this->pdf->output(), 'evento.pdf')
-                    ->from('constancias@prepa11.com', 'Constancias-Prepa11');
+                    ->from('noreply@constanciasprepa11.com', 'Constancias-Prepa11');
     }
 }

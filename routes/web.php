@@ -4,8 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FirmaController;
 use App\Http\Controllers\CuentaController;
 use App\Http\Controllers\EventoController;
+use App\Http\Controllers\MensajeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ArchivosController;
+use App\Http\Controllers\CalendarioController;
 use App\Http\Controllers\RegistrarEventoController;
 use App\Http\Controllers\RegistrarEvidenciaController;
 use App\Http\Controllers\Auth\RegisteredUserController;
@@ -21,22 +23,29 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 |
 */
 
+//Mostrar Calendario
+Route::get('/calendario', [CalendarioController::class, 'index'])->name('calendario.index');
+
 //RUTAS PARA EL USUARIO
 Route::middleware('guest')->group(function () {
     //Pagina principal
-    Route::get('/', function () { return view('index'); });
+    Route::get('/', function () { return view('index'); })->name('index');
 
     //Registrar evento
     Route::get('/registrar-evento', [RegistrarEventoController::class, 'index'])->name('evento.index');
     Route::post('/registrar-evento', [RegistrarEventoController::class, 'store'])->name('evento.store');
 
     //Verificar folio
-    Route::get('/generar-constancias', [RegistrarEvidenciaController::class, 'index'])->name('evidencia.index');
-    Route::post('/generar-constancias', [RegistrarEvidenciaController::class, 'verificarFolio'])->name('evidencia.verify');
+    Route::get('/verificar-folio', [RegistrarEvidenciaController::class, 'buscarFolio'])->name('evidencia.buscar');
+    Route::post('/verificar-folio', [RegistrarEvidenciaController::class, 'verificarFolio'])->name('evidencia.verify');
 
     //Subir evidencia
+    Route::get('/generar-constancias/{folio}', [RegistrarEvidenciaController::class, 'index'])->name('evidencia.index');
     Route::post('/generar-constancias/evidencia', [RegistrarEvidenciaController::class, 'store'])->name('evidencia.store');
-    Route::post('/generar-constancias/archivos', [ArchivosController::class, 'store'])->name('evidencia.archivos.store');
+    Route::post('/generar-constancias/archivos', [ArchivosController::class, 'store'])->name('evidencia.archivos.store');   //Almacena los archivos
+
+    //Mensaje
+    Route::get('/mensaje/{vista}', [MensajeController::class, 'index'])->name('mensaje.index');
 });
 
 //RUTAS PARA EL PERFIL

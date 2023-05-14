@@ -15,7 +15,7 @@
 
         <!-- Formulario para subir archivos -->
         <div class="md:w-1/2 px-10">
-            <label class="mb-2 block text-gray-500 font-bold">Añadir archivos de evidencia (videos, imagenes, documentos, presentaciones)</label>
+            <label class="mb-2 block text-gray-500 font-bold">Añadir archivos de evidencia (videos, imagenes, documentos, presentaciones)*</label>
 
             <form action="{{ route('evidencia.archivos.store')}}" method="POST" enctype="multipart/form-data" id="dropzone" class="dropzone border-dashed border-2 w-full h-96 max-h-96 overflow-y-auto rounded flex justify-center items-center">
                 @csrf
@@ -30,12 +30,14 @@
                     <div class="mb-5">
                         <label class="mb-2 block text-gray-500 font-bold">Documento de autorización (PDF)*</label>
                         <input type="file" name="pdf" id='pdf' accept="application/pdf" :value="old('pdf')" required>
+                        <x-input-error :messages="$errors->get('pdf')" class="mt-2" />
                     </div>
 
                     <!-- Material para el evento -->
                     <div class="mb-5">
                         <label class="mb-2 block text-gray-500 font-bold">Publicaciones del evento (links/enlaces)</label>
                         <textarea name="links" id="links" rows="6" placeholder="Escriba aqui los links/enlaces generados sobre el evento" class="block mt-1 w-11/12 rounded"></textarea>
+                        <x-input-error :messages="$errors->get('links')" class="mt-2" />
                     </div>
 
                     

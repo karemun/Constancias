@@ -11,7 +11,6 @@
 
     <div class="mt-16 flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
         <div class="w-full sm:max-w-md mt-2 pb-10 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
-
             <div class="container mx-auto mt-5">
                 <h2 class="font-bold text-center text-xl mb-10 text-gray-600">
                     Datos del solicitante
@@ -20,14 +19,14 @@
 
             <!-- Nombre solicitante -->
             <div>
-                <x-input-label for="nombre" :value="__('Nombre')" />
+                <x-input-label for="nombre" :value="__('Nombre*')" />
                 <x-text-input id="nombre" class="block mt-1 w-full" type="text" name="nombre" :value="old('nombre')" required/>
                 <x-input-error :messages="$errors->get('nombre')" class="mt-2" />
             </div>
 
             <!-- Email -->
             <div class="mt-4">
-                <x-input-label for="email" :value="__('Correo electronico')" />
+                <x-input-label for="email" :value="__('Correo electronico*')" />
                 <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
                 <p class="mt-1 text-sm text-gray-600">
                     Asegurate de escribir un correo electronico valido, ya que ahi se te contactara para hacer el seguimiento del evento.
@@ -45,28 +44,28 @@
 
             <!-- Nombre del evento -->
             <div>
-                <x-input-label for="nombre_evento" :value="__('Nombre del evento')" />
+                <x-input-label for="nombre_evento" :value="__('Nombre del evento*')" />
                 <x-text-input id="nombre_evento" class="block mt-1 w-full" type="text" name="nombre_evento" :value="old('nombre_evento')" required/>
                 <x-input-error :messages="$errors->get('nombre_evento')" class="mt-2" />
             </div>
 
             <!-- Tipo de evento -->
             <div class="mt-4">
-                <x-input-label for="tipo" :value="__('Tipo de evento')" />
+                <x-input-label for="tipo" :value="__('Tipo de evento*')" />
                 <x-text-input id="tipo" class="block mt-1 w-full" type="text" name="tipo" :value="old('tipo')" placeholder="ej. Convención, Deportivo, etc" required/>
                 <x-input-error :messages="$errors->get('tipo')" class="mt-2" />
             </div>
 
             <!-- Departamento del evento -->
             <div class="mt-4">
-                <x-input-label for="departamento" :value="__('Departamento al que pertenece el evento')" />
+                <x-input-label for="departamento" :value="__('Departamento al que pertenece el evento*')" />
                 <x-text-input id="departamento" class="block mt-1 w-full" type="text" name="departamento" :value="old('departamento')" placeholder="ej. Matemáticas, Tecnológicos, etc." required/>
                 <x-input-error :messages="$errors->get('departamento')" class="mt-2" />
             </div>
 
             <!-- Ubicacion del evento -->
             <div class="mt-4">
-                <x-input-label for="ubicacion" :value="__('Ubicación del evento')" />
+                <x-input-label for="ubicacion" :value="__('Ubicación del evento*')" />
                 <x-text-input id="ubicacion" class="block mt-1 w-full" type="text" name="ubicacion" :value="old('ubicacion')" required/>
                 <x-input-error :messages="$errors->get('ubicacion')" class="mt-2" />
             </div>
@@ -75,18 +74,18 @@
             <div class="mt-6">
                 <x-input-label :value="__('Fecha del evento')" />
 
-                <x-input-label class="font-medium mt-2" for="fecha_inicio" :value="__('Inicio:')" />
+                <x-input-label class="font-medium mt-2" for="fecha_inicio" :value="__('Inicio*')" />
                 <x-text-input id="fecha_inicio" class="block mt-1 w-full" type="datetime-local" name="fecha_inicio" :value="old('fecha_inicio')" required/>
                 <x-input-error :messages="$errors->get('fecha_inicio')" class="mt-2" />
 
-                <x-input-label class="font-medium mt-2" for="fecha_final" :value="__('Finalización:')" />
+                <x-input-label class="font-medium mt-2" for="fecha_final" :value="__('Finalización*')" />
                 <x-text-input id="fecha_final" class="block mt-1 w-full" type="datetime-local" name="fecha_final" :value="old('fecha_final')" required/>
                 <x-input-error :messages="$errors->get('fecha_final')" class="mt-2" />
             </div>
 
             <!-- Material para el evento -->
             <div class="mt-8">
-                <x-input-label for="material" :value="__('Material que requiera para el evento')" />
+                <x-input-label for="material" :value="__('Material que requiera para el evento*')" />
                 <textarea name="material" id="material" rows="5" placeholder="Escriba aqui los materiales" class="block mt-1 w-full rounded">{{ old('material') }}</textarea>
                 <x-input-error :messages="$errors->get('material')" class="mt-2" />
             </div>
@@ -115,10 +114,10 @@
             <div class="w-full text-sm text-left text-slate-500 clone-row">
                 <!-- Labels -->
                 <div class="text-xs text-slate-700 uppercase font-semibold bg-slate-50 grid grid-cols-6 gap-4 px-6 py-3">
-                    <span>Nombre completo</span>
-                    <span>Rol</span>
-                    <span>Actividad</span>
-                    <span>Puesto</span>
+                    <span>Nombre completo*</span>
+                    <span>Rol*</span>
+                    <span>Actividad*</span>
+                    <span>Puesto*</span>
                     <span>Código UDG (si aplica)</span>
                     <span></span>
                 </div>

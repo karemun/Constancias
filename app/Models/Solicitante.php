@@ -16,7 +16,7 @@ class Solicitante extends Model
     ];
 
     public function evento()
-    {   
+    {
         return $this->belongsTo(Evento::class); //Pertenece a evento
     }
 }

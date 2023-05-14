@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('evento_id')->constrained()->onDelete('cascade');
             $table->string('documento');
-            $table->string('enlace')->nullable();
+            $table->text('enlace')->nullable();
             $table->timestamps();
         });
     }

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nombre');
             $table->string('email');
+            $table->string('codigo')->nullable();
             $table->foreignId('evento_id')->constrained()->onDelete('cascade'); //Si se borra el evento, el solicitante tambien tambien
             $table->timestamps();
         });

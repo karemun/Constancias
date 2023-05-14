@@ -31,7 +31,7 @@
                         
                         <div class="hidden sm:flex sm:items-center sm:ml-6">
                             <a href="/" class="px-3 py-2 text-gray-800 hover:text-gray-500 font-semibold mr-8">Inicio</a>
-                            <a href="/" class="px-3 py-2 duration-150 text-gray-800 hover:text-gray-500">Calendario</a>
+                            <a href="{{ route('calendario.index') }}" class="px-3 py-2 duration-150 text-gray-800 hover:text-gray-500">Calendario</a>
                         </div>
                         
 

@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('tipo');
             $table->string('departamento');
             $table->string('ubicacion');
-            $table->timestamp('fecha_inicio');
-            $table->timestamp('fecha_final');
+            $table->datetime('fecha_inicio');
+            $table->datetime('fecha_final');
             $table->text('material');
             $table->string('folio')->nullable()->unique();
             $table->boolean('auth')->default(false);

@@ -9,7 +9,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class MyEmail extends Mailable
+class InformacionEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -27,7 +27,7 @@ class MyEmail extends Mailable
     public function build()
     {
         return $this->subject($this->subject)
-                    ->view($this->view)
+                    ->markdown($this->view)
                     ->with(['data' => $this->data])
                     ->from('noreply@constanciasprepa11.com', 'Constancias-Prepa11');
     }

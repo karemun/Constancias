@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\PdfEmail;
 use App\Mail\MyEmail;
+use App\Mail\PdfEmail;
 use App\Models\Evento;
-use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
 class EventoController extends Controller
 {
@@ -20,7 +20,11 @@ class EventoController extends Controller
 
     public function show(Evento $evento)
     {
-        return view('directivo.evento.show', compact('evento'));
+        if ($evento->auth == true) { //Si el evento ya ha sido autorizado
+            return view('directivo.evento.mensaje')->with('mensaje', 'El evento ya ha sido autorizado por otro directivo.');
+        } else {
+            return view('directivo.evento.show', compact('evento'));
+        }
     }
 
     public function autorizar(Request $request, Evento $evento)
@@ -41,7 +45,7 @@ class EventoController extends Controller
                 $pdf = PDF::loadView('pdf.evento-pdf', ['data'=>$data]);
 
                 //Se envia mail con el pdf adjunto
-                Mail::to($solicitante)->send(new PdfEmail('mails.autorizar-evento', 'Autorización de Evento', $data, $pdf));
+                //Mail::to($solicitante)->send(new PdfEmail('mails.autorizar-evento', 'Autorización de Evento', $data, $pdf));
                 //$pdf->loadHTML('<h1>Test</h1>');
                 //return $pdf->stream();  //Se muestra el PDF
 
@@ -49,7 +53,8 @@ class EventoController extends Controller
 
             case 'rechazar':
                 //Se envia mail y se elimina el evento
-                Mail::to($solicitante)->send(new MyEmail('mails.rechazar-evento', 'Autorización de Evento', $data));
+                //Mail::to($solicitante)->send(new MyEmail('mails.rechazar-evento', 'Autorización de Evento', $data));
+                
                 $evento->delete();
                 break;
         }
