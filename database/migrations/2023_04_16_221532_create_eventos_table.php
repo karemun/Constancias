@@ -21,7 +21,7 @@ return new class extends Migration
             $table->datetime('fecha_final');
             $table->text('material');
             $table->string('folio')->nullable()->unique();
-            $table->boolean('auth')->default(false);
+            $table->boolean('auth')->default(false)->nullable();
             $table->timestamps();
         });
     }

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Eventos Pendientes
+    Certificados Pendientes
 @endsection
 
 @section('content')
@@ -43,7 +43,7 @@
                             </tr>
                         @endforeach
                     @else
-                        <td colspan="4" class="px-6 py-4 font-medium">No hay eventos pendientes.</td>
+                        <td colspan="4" class="px-6 py-4 font-medium">No hay certificados pendientes.</td>
                     @endif
                 </tbody>
             </table>
@@ -55,6 +55,7 @@
 
         </div>
     </div>
+
 @endsection
 
 @push('script')

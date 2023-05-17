@@ -13,6 +13,7 @@ class Archivo extends Model
         'evento_id',
         'evidencia_id',
         'archivo',
+        'tipo'
     ];
 
     public function evidencia()

@@ -83,11 +83,11 @@ class RegistrarEventoController extends Controller
                 'evento_id' => Evento::latest('id')->first()->id,
             ]);
         }
-        /*
+        
         $data = Evento::with('solicitante', 'participante')->latest()->first(); //Se obtiene la informacion creada
         $emails = User::where('email_verified_at', '!=', null)->pluck('email'); //Se obtienen los correos verificados
         Mail::to($emails)->send(new MyEmail('mails.solicitar-evento', 'Se solicito un nuevo evento', $data)); //Se envia correo con la informacion
-        */
+        
         
         Session::put('formulario', true);  // Almacena que se envio formulario en la sesión
         return redirect()->route('mensaje.index', ['vista' => 'evento.successful']); //Se redirige a la vista con la ruta

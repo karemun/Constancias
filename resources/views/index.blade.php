@@ -43,7 +43,7 @@
 
         <div class="w-full text-center block">
             <a href="{{ route('evidencia.buscar') }}" class="flex items-center justify-center leading-normal bg-gray-800 hover:bg-gray-700 transition-colors cursor-pointer font-bold p-3 mt-10 text-white rounded-lg"> 
-                Generar Constancias
+                Solicitar Constancias
             </a>
         </div>
 

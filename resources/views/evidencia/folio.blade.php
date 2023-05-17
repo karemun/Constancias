@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Generar Constancias
+    Solicitar Constancias
 @endsection
 
 @section('content')
@@ -26,7 +26,7 @@
                     </h2>
             
                     <p class="mt-1 text-sm text-gray-600">
-                        Ingrese el numero de folio del evento para poder acceder a la generación de constancias.
+                        Ingrese el numero de folio del evento para poder solicitar las constancias.
                     </p>
 
                     <form method="POST" action="{{ route('evidencia.verify') }}" class="mt-6 space-y-6">

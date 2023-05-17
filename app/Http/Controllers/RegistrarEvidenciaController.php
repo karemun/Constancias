@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Mail\InformacionEmail;
+use App\Mail\MyEmail;
 use App\Models\Evento;
 use App\Models\Archivo;
 use App\Models\Evidencia;
@@ -75,21 +75,37 @@ class RegistrarEvidenciaController extends Controller
 
             //Se guardan los archivos en BD
             for ($i=1; $i <= count($request->archivo); $i++) {
+
+                //Se obtiene el tipo de archivo segun su extension
+                $archivo = $request->archivo[$i];                       //Obtiene el nombre del archivo
+                $extension = pathinfo($archivo, PATHINFO_EXTENSION);    //Obtiene la extension
+
+                if (in_array($extension, ['png', 'jpg', 'jpeg'])) {     //Examina el tipo de archivo
+                    $tipo = 'imagen';
+                } elseif (in_array($extension, ['pdf', 'doc', 'docx', 'ppt', 'pptx'])) {
+                    $tipo = 'documento';
+                } elseif (in_array($extension, ['mp4', 'avi', 'mov', 'wmv'])) {
+                    $tipo = 'video';
+                } else {
+                    $tipo = 'otro';
+                }
+                //Se crea el archivo
                 Archivo::create([
                     'evento_id' => $evento->id,
                     'evidencia_id' => Evidencia::latest('id')->first()->id,
-                    'archivo' => $request->archivo[$i],
+                    'archivo' => $archivo,
+                    'tipo' => $tipo,
                 ]);
             }
 
-            //Se notifica con correo a los directivos
+            /*Se notifica con correo a los directivos
             $emails = User::where('email_verified_at', '!=', null)->pluck('email'); //Se obtienen los correos verificados
             $data = [
                 'nombre' => $evento->nombre,
                 'fecha_inicio' => $evento->fecha_inicio,
                 'fecha_final' => $evento->fecha_final,
             ];
-            Mail::to($emails)->send(new InformacionEmail('mails.evidencia', 'Se Solicitaron Constancias', $data)); //Se envia correo con la informacion
+            Mail::to($emails)->send(new MyEmail('mails.solicitar-evidencia', 'Se Solicitaron Constancias', $data)); //Se envia correo con la informacion*/
 
             Session::put('formulario', true);  // Almacena que se envio formulario en la sesión
             return redirect()->route('mensaje.index', ['vista' => 'evidencia.successful']); //Se redirige a la vista con la ruta

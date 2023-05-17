@@ -13,7 +13,9 @@ class EventoController extends Controller
 {
     public function index()
     {
-        $eventos = Evento::where('auth', false)->paginate(10); //Se obtienen los eventos no autorizados
+        $eventos = Evento::where('auth', false)   //Se obtienen los eventos no autorizados
+                ->orderBy('fecha_inicio', 'asc')  // Se ordenan por fecha de inicio del evento
+                ->paginate(10);
 
         return view('directivo.evento.pendientes', compact('eventos'));
     }
@@ -45,7 +47,7 @@ class EventoController extends Controller
                 $pdf = PDF::loadView('pdf.evento-pdf', ['data'=>$data]);
 
                 //Se envia mail con el pdf adjunto
-                //Mail::to($solicitante)->send(new PdfEmail('mails.autorizar-evento', 'Autorización de Evento', $data, $pdf));
+                Mail::to($solicitante)->send(new PdfEmail('mails.autorizar-evento', 'Autorización de Evento', $data, $pdf));
                 //$pdf->loadHTML('<h1>Test</h1>');
                 //return $pdf->stream();  //Se muestra el PDF
 
@@ -53,7 +55,7 @@ class EventoController extends Controller
 
             case 'rechazar':
                 //Se envia mail y se elimina el evento
-                //Mail::to($solicitante)->send(new MyEmail('mails.rechazar-evento', 'Autorización de Evento', $data));
+                Mail::to($solicitante)->send(new MyEmail('mails.rechazar-evento', 'Autorización de Evento', $data));
                 
                 $evento->delete();
                 break;

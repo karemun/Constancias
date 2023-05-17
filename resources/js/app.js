@@ -12,7 +12,7 @@ if(document.getElementById("dropzone")) {
     
     const dropzone = new Dropzone("#dropzone", {
         dictDefaultMessage: "Sube aquí tus archivos",
-        acceptedFiles: ".png,.jpg,.jpeg,.gif,.pdf,.doc,.docx,.ppt,.mp4,.avi,.mov,.wmv",
+        acceptedFiles: ".png,.jpg,.jpeg,.pdf,.doc,.docx,.ppt,.pptx,.mp4,.avi,.mov,.wmv",
         addRemoveLinks: true,
         dictRemoveFile: "Borrar archivo",
         maxFilesize: 10,

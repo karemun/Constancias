@@ -7,7 +7,9 @@ use App\Http\Controllers\EventoController;
 use App\Http\Controllers\MensajeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ArchivosController;
+use App\Http\Controllers\EvidenciaController;
 use App\Http\Controllers\CalendarioController;
+use App\Http\Controllers\ConstanciasController;
 use App\Http\Controllers\RegistrarEventoController;
 use App\Http\Controllers\RegistrarEvidenciaController;
 use App\Http\Controllers\Auth\RegisteredUserController;
@@ -40,9 +42,9 @@ Route::middleware('guest')->group(function () {
     Route::post('/verificar-folio', [RegistrarEvidenciaController::class, 'verificarFolio'])->name('evidencia.verify');
 
     //Subir evidencia
-    Route::get('/generar-constancias/{folio}', [RegistrarEvidenciaController::class, 'index'])->name('evidencia.index');
-    Route::post('/generar-constancias/evidencia', [RegistrarEvidenciaController::class, 'store'])->name('evidencia.store');
-    Route::post('/generar-constancias/archivos', [ArchivosController::class, 'store'])->name('evidencia.archivos.store');   //Almacena los archivos
+    Route::get('/solicitar-constancias/{folio}', [RegistrarEvidenciaController::class, 'index'])->name('evidencia.index');
+    Route::post('/solicitar-constancias/evidencia', [RegistrarEvidenciaController::class, 'store'])->name('evidencia.store');
+    Route::post('/solicitar-constancias/archivos', [ArchivosController::class, 'store'])->name('evidencia.archivos.store');   //Almacena los archivos
 
     //Mensaje
     Route::get('/mensaje/{vista}', [MensajeController::class, 'index'])->name('mensaje.index');
@@ -71,9 +73,17 @@ Route::middleware('auth', 'verified')->group(function () {
     //Eventos pendientes
     Route::get('/eventos-pendientes', [EventoController::class, 'index'])->name('directivo.evento.index');
     Route::get('/evento/{evento:folio}', [EventoController::class, 'show'])->name('directivo.evento.show');
-
     //Autorizar evento
     Route::post('/evento/{evento:folio}', [EventoController::class, 'autorizar'])->name('directivo.evento.autorizar');
+
+    //Evidencia pendiente
+    Route::get('/evidencia-pendiente', [EvidenciaController::class, 'index'])->name('directivo.evidencia.index');
+    Route::get('/evidencia/{evento:folio}', [EvidenciaController::class, 'show'])->name('directivo.evidencia.show');
+    //Autorizar evidencia
+    Route::post('/evidencia/{evento:folio}', [EvidenciaController::class, 'autorizar'])->name('directivo.evidencia.autorizar');
+
+    //Generar constancias
+    Route::get('/generar-constancias/{evento:folio}', [ConstanciasController::class, 'index'])->name('directivo.constancias.index');
 });
 
 require __DIR__.'/auth.php';

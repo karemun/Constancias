@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('evidencia_id')->constrained()->onDelete('cascade');
             $table->foreignId('evento_id')->constrained()->onDelete('cascade');
             $table->string('archivo');
+            $table->string('tipo');
             $table->timestamps();
         });
     }

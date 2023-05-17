@@ -17,7 +17,8 @@
         <!-- Page Heading -->
         <div class="min-h-screen bg-gray-100">
             <header class="bg-udg text-white">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex items-center">
+                    <img src="{{ asset('img/logo_udg.png') }}" alt="Logo de UDG" class="w-14 h-14 mr-1">
                     <h2 class="font-semibold text-xl text-gray-300 leading-tight">
                         Preparatoria 11
                     </h2>
@@ -29,7 +30,7 @@
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="container mx-auto flex justify-between items-center h-16">
                         
-                        <div class="hidden sm:flex sm:items-center sm:ml-6">
+                        <div class="sm:flex sm:items-center sm:ml-6">
                             <a href="/" class="px-3 py-2 text-gray-800 hover:text-gray-500 font-semibold mr-8">Inicio</a>
                             <a href="{{ route('calendario.index') }}" class="px-3 py-2 duration-150 text-gray-800 hover:text-gray-500">Calendario</a>
                         </div>

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Generar Constancias
+    Solicitar Constancias
 @endsection
 
 @push('styles')

@@ -1,6 +1,6 @@
 <x-mostrar-mensaje>
     <x-slot:titulo>
-        Generar Constancias
+        Solicitar Constancias
     </x-slot:titulo>
 
     <x-slot:mensaje>
