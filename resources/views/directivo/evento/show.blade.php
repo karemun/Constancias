@@ -150,9 +150,11 @@
                         <textarea name="observacion" id="observacion" rows="5" placeholder="Escribe aqui las observaciones." class="block mt-1 w-full rounded"></textarea>
                     </div>
 
-                    <x-primary-button class="w-full justify-center mt-10 bg-blue-600 hover:bg-blue-500" name="accion" value="autorizar" onclick="return confirm('¿Estas seguro de que quieres autorizar el evento?')">
-                        {{ __('Autorizar Evento') }}
-                    </x-primary-button>
+                    <button name="accion" value="autorizar"
+                    class="w-full justify-center mt-10 inline-flex items-center px-4 py-2 bg-emerald-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 transition ease-in-out duration-150"
+                    onclick="return confirm('¿Estas seguro de que quieres autorizar el evento?')">
+                        Autorizar Evento
+                    </button>
 
                     <x-primary-button class="w-full justify-center mt-10 bg-red-600 hover:bg-red-500" name="accion" value="rechazar" onclick="return confirm('¿Estas seguro de que quieres rechazar el evento?')">
                         {{ __('Rechazar Evento') }}

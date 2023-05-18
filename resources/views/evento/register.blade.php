@@ -24,6 +24,13 @@
                 <x-input-error :messages="$errors->get('nombre')" class="mt-2" />
             </div>
 
+            <!-- Codigo UDG solicitante -->
+            <div class="mt-4">
+                <x-input-label for="codigo" :value="__('Codigo UDG (si aplica)')" />
+                <x-text-input id="codigo" class="block mt-1 w-full" type="text" name="codigo" :value="old('codigo')"/>
+                <x-input-error :messages="$errors->get('codigo')" class="mt-2" />
+            </div>
+
             <!-- Email -->
             <div class="mt-4">
                 <x-input-label for="email" :value="__('Correo electronico*')" />
@@ -113,7 +120,7 @@
             
             <div class="w-full text-sm text-left text-slate-500 clone-row">
                 <!-- Labels -->
-                <div class="text-xs text-slate-700 uppercase font-semibold bg-slate-50 grid grid-cols-6 gap-4 px-6 py-3">
+                <div class="text-xs text-slate-700 uppercase font-semibold bg-slate-50 grid grid-cols-6 gap-4 px-6 py-3 mx-auto">
                     <span>Nombre completo*</span>
                     <span>Rol*</span>
                     <span>Actividad*</span>
@@ -125,22 +132,22 @@
                 <!-- Inputs -->
                 <div class="bg-white border-b border-slate-200">
                     <div class="px-6 py-4 grid grid-cols-6 gap-4">
-                        <div>
+                        <div class="w-full sm:w-auto">
                             <input type="text" name="nombre_p[]" id="nombre_p[]" class="bg-gray-50 border border-slate-300 text-slate-900 text-sm rounded-lg block w-full" required>
                         </div>
-                        <div>
+                        <div class="w-full sm:w-auto">
                             <input type="text" name="rol_p[]" id="rol_p[]" class="bg-gray-50 border border-slate-300 text-slate-900 text-sm rounded-lg block w-full" required>
                         </div>
-                        <div>
+                        <div class="w-full sm:w-auto">
                             <input type="text" name="actividad_p[]" id="actividad_p[]" class="bg-gray-50 border border-slate-300 text-slate-900 text-sm rounded-lg block w-full" required>
                         </div>
-                        <div>
+                        <div class="w-full sm:w-auto">
                             <input type="text" name="puesto_p[]" id="puesto_p[]" class="bg-gray-50 border border-slate-300 text-slate-900 text-sm rounded-lg block w-full" required>
                         </div>
-                        <div>
+                        <div class="w-full sm:w-auto">
                             <input type="text" name="codigo_p[]" id="codigo_p[]" class="bg-gray-50 border border-slate-300 text-slate-900 text-sm rounded-lg block w-full"/>
                         </div>
-                        <div>
+                        <div class="w-full sm:w-auto">
                             <button type="button" class="btn-del inline-flex items-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700">
                                 Eliminar
                             </button>

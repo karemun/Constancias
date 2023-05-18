@@ -13,6 +13,10 @@
                 <td><b>Email:</b></td>
                 <td>{{ $data['solicitante']['email'] }}</td>
             </tr>
+            <tr>
+                <td><b>Codigo:</b></td>
+                <td>{{ $data['solicitante']['codigo'] }}</td>
+            </tr>
         </table>
         <br>
         <hr><br>

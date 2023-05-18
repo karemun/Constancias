@@ -23,10 +23,12 @@ class EvidenciaController extends Controller
 
     public function show(Evento $evento)
     {
-        $eventoId = $evento->id;
-        $evento = Evento::with('evidencia.archivo')->find($eventoId);
-
-        return view('directivo.evidencia.show', compact('evento'));
+        //Si el evento ya no existe o ya fue autorizado
+        if ($evento->evidencia->count() == 0 || is_null($evento->auth)) {
+            return view('directivo.evidencia.mensaje')->with('mensaje', 'La evidencia ya ha sido autorizada/rechazada por otro directivo.');
+        } else {
+            return view('directivo.evidencia.show', compact('evento'));
+        }
     }
 
     public function autorizar(Request $request, Evento $evento)
@@ -37,10 +39,6 @@ class EvidenciaController extends Controller
         switch ($accion) {
 
             case 'autorizar':
-                //Se desactiva el evento
-                $evento->auth = null;
-                $evento->save();
-
                 return redirect()->route('directivo.constancias.index', compact('evento'));
 
             case 'rechazar':
@@ -65,17 +63,16 @@ class EvidenciaController extends Controller
                     }
                 }
 
-                /*Se envia mail y se elimina el evento
+                //Se envia mail y se elimina el evento
                 $data = [
                     'observacion' => $request->observacion,
                     'nombre' => $evento->nombre,
                 ];
-                //Mail::to($solicitante)->send(new InformacionEmail('mails.rechazar-evidencia', 'Solicitud de Constancias', $data));*/
+                Mail::to($solicitante)->send(new InformacionEmail('mails.rechazar-evidencia', 'Solicitud de Constancias', $data));//*/
 
                 Evidencia::where('evento_id', $evento->id)->delete(); //Se elimina de la BD
 
-                break;
+                return redirect()->route('directivo.evidencia.index')->with('mensaje', 'Se realizo la acción correctamente.');
         }
-        return redirect()->route('directivo.evidencia.index')->with('mensaje', 'Se realizo la acción correctamente.');
     }
 }

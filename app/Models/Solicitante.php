@@ -12,6 +12,7 @@ class Solicitante extends Model
     protected $fillable = [
         'nombre',
         'email',
+        'codigo',
         'evento_id'
     ];
 

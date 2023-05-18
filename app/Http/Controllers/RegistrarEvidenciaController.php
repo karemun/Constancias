@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\InformacionEmail;
 use App\Models\User;
-use App\Mail\MyEmail;
 use App\Models\Evento;
 use App\Models\Archivo;
 use App\Models\Evidencia;
@@ -16,8 +16,16 @@ class RegistrarEvidenciaController extends Controller
 {
     public function index($folio)
     {
+        $evento = Evento::where('folio', $folio)->first();
+
         if (Session::has('formularioFolio')) {   //Verificar si se envio el folio antes de entrar a la vista
-            return view('evidencia.subir-evidencia', compact('folio'));
+            if ($evento && $evento->evidencia->count() > 0) { //Si ya se envio evidencia anteriormente
+                Session::forget('formularioFolio');  //Se limpia la sesion
+                return view('evidencia.mensaje');
+            } 
+            else {
+                return view('evidencia.subir-evidencia', compact('folio'));
+            }
         } 
         else {
             return redirect()->route('evidencia.buscar'); //Si no, redirige al formulario
@@ -44,7 +52,7 @@ class RegistrarEvidenciaController extends Controller
     }
 
     public function store(Request $request)
-    {   
+    {
         //Validaciones
         $request->validate([
             'pdf' => 'required|file|mimes:pdf|max:2048',
@@ -53,7 +61,7 @@ class RegistrarEvidenciaController extends Controller
         ]);
 
         if ($request->pdf == null || empty($request->archivo)) {
-            return redirect()->back()->withErrors(['mensaje' => 'Ha ocurrido un error. Asegurate de enviar los datos correctos.']);
+            return redirect()->back()->with('mensaje', 'Ha ocurrido un error. Asegurate de enviar los datos correctos.');
         }
 
         $evento = Evento::where('folio', $request->folio)->where('auth', true)->first(); //Busca si existe el folio y si esta autorizado
@@ -89,6 +97,7 @@ class RegistrarEvidenciaController extends Controller
                 } else {
                     $tipo = 'otro';
                 }
+
                 //Se crea el archivo
                 Archivo::create([
                     'evento_id' => $evento->id,
@@ -98,16 +107,18 @@ class RegistrarEvidenciaController extends Controller
                 ]);
             }
 
-            /*Se notifica con correo a los directivos
+            Session::put('formulario', true);  // Almacena que se envio formulario en la sesión
+
+            //Se notifica con correo a los directivos
             $emails = User::where('email_verified_at', '!=', null)->pluck('email'); //Se obtienen los correos verificados
             $data = [
                 'nombre' => $evento->nombre,
                 'fecha_inicio' => $evento->fecha_inicio,
                 'fecha_final' => $evento->fecha_final,
+                'evento' => $evento,
             ];
-            Mail::to($emails)->send(new MyEmail('mails.solicitar-evidencia', 'Se Solicitaron Constancias', $data)); //Se envia correo con la informacion*/
+            Mail::to($emails)->send(new InformacionEmail('mails.solicitar-evidencia', 'Se Solicitaron Constancias', $data)); //Se envia correo con la informacion
 
-            Session::put('formulario', true);  // Almacena que se envio formulario en la sesión
             return redirect()->route('mensaje.index', ['vista' => 'evidencia.successful']); //Se redirige a la vista con la ruta
         } 
         else {

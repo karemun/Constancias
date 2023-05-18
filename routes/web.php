@@ -84,6 +84,7 @@ Route::middleware('auth', 'verified')->group(function () {
 
     //Generar constancias
     Route::get('/generar-constancias/{evento:folio}', [ConstanciasController::class, 'index'])->name('directivo.constancias.index');
+    Route::post('/generar-constancias/{evento:folio}', [ConstanciasController::class, 'store'])->name('directivo.constancias.store');
 });
 
 require __DIR__.'/auth.php';

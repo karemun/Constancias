@@ -30,6 +30,7 @@ class RegistrarEventoController extends Controller
             //Validacion del solicitante
             'nombre' => 'required|max:100',
             'email' => 'required|email|max:100',
+            'codigo' => 'nullable|min:9|max:10',
 
             //Validacion del evento
             'nombre_evento' => 'required|max:100',
@@ -45,11 +46,16 @@ class RegistrarEventoController extends Controller
             'rol_p.*' => 'required|max:100',
             'actividad_p.*' => 'required|max:100',
             'puesto_p.*' => 'required|max:100',
-            'codigo_p.*' => 'nullable|min:9'
+            'codigo_p.*' => 'nullable|min:9|max:10',
         ]);
 
-        //Se valida que haya al menos un participante
-        if ($request->nombre_p == null) {
+        // Se valida que haya al menos un participante
+        if (
+            empty($request->nombre_p) ||
+            empty($request->rol_p) ||
+            empty($request->actividad_p) ||
+            empty($request->puesto_p)
+        ) {
             return back()->with('mensaje', 'Debe haber al menos un participante.');
         }
 
@@ -69,6 +75,7 @@ class RegistrarEventoController extends Controller
         Solicitante::create([
             'nombre' => $request->nombre,
             'email' => $request->email,
+            'codigo' => $request->codigo,
             'evento_id' => Evento::latest('id')->first()->id,   //Se recupera el ultimo id creado de Evento
         ]);
 
@@ -84,12 +91,12 @@ class RegistrarEventoController extends Controller
             ]);
         }
         
+        Session::put('formulario', true);  // Almacena que se envio formulario en la sesión
+        
         $data = Evento::with('solicitante', 'participante')->latest()->first(); //Se obtiene la informacion creada
         $emails = User::where('email_verified_at', '!=', null)->pluck('email'); //Se obtienen los correos verificados
-        Mail::to($emails)->send(new MyEmail('mails.solicitar-evento', 'Se solicito un nuevo evento', $data)); //Se envia correo con la informacion
+        Mail::to($emails)->send(new MyEmail('mails.solicitar-evento', 'Se solicito un nuevo evento', $data)); //Se envia correo con la informacion*/
         
-        
-        Session::put('formulario', true);  // Almacena que se envio formulario en la sesión
         return redirect()->route('mensaje.index', ['vista' => 'evento.successful']); //Se redirige a la vista con la ruta
     }
 

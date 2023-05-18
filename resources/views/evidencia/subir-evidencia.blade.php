@@ -39,16 +39,21 @@
                         <textarea name="links" id="links" rows="6" placeholder="Escriba aqui los links/enlaces generados sobre el evento" class="block mt-1 w-11/12 rounded"></textarea>
                         <x-input-error :messages="$errors->get('links')" class="mt-2" />
                     </div>
-
                     
                     {{-- Archivos --}}
                     <div id="archivos"></div>
 
+                    @if (session('mensaje'))
+                        <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
+                            {{ session('mensaje') }}
+                        </p>
+                    @endif
+
                     <p class="mt-1 text-sm text-gray-600">
-                        Nota: Al enviar los datos, deberas esperar a que los directivos validen la evidencia enviada (recibiras un correo con la respuesta) y se generen las constancias.
+                        Nota: Al enviar los datos, deberás esperar a que los directivos validen la evidencia enviada (recibirás un correo con la respuesta) y se generen las constancias.
                     </p>
 
-                    <input type="submit" value="Enviar Datos" class="bg-gray-800 hover:bg-gray-700 transition-colors cursor-pointer mt-4 px-4 py-2 font-semibold text-xs uppercase tracking-widest w-full p-3 text-white rounded-md"/>
+                    <input type="submit" value="Enviar Datos" class="bg-pink-700 hover:bg-pink-900 transition-colors cursor-pointer mt-4 px-4 py-2 font-semibold text-xs uppercase tracking-widest w-full p-3 text-white rounded-md"/>
             </form>
         </div>
     </div>
