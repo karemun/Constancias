@@ -56,8 +56,8 @@ class EventoController extends Controller
             case 'rechazar':
                 //Se envia mail y se elimina el evento
                 Mail::to($solicitante)->send(new MyEmail('mails.rechazar-evento', 'Autorización de Evento', $data));
-                
                 $evento->delete();
+                
                 break;
         }
 

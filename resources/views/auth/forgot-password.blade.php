@@ -29,10 +29,6 @@
                     <x-link :href="route('login')">
                         Iniciar Sesión
                     </x-link>
-        
-                    <x-link :href="route('register')">
-                        Crear Cuenta
-                    </x-link>
                 </div>
         
                 <x-primary-button class="w-full justify-center">

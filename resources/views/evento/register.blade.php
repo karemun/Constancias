@@ -19,7 +19,7 @@
 
             <!-- Nombre solicitante -->
             <div>
-                <x-input-label for="nombre" :value="__('Nombre*')" />
+                <x-input-label for="nombre" :value="__('Nombre completo*')" />
                 <x-text-input id="nombre" class="block mt-1 w-full" type="text" name="nombre" :value="old('nombre')" required/>
                 <x-input-error :messages="$errors->get('nombre')" class="mt-2" />
             </div>

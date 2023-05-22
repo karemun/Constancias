@@ -31,9 +31,9 @@
                     @if (!$eventos->isEmpty())
                         @foreach ($eventos as $evento)
                             <tr class="border-b dark:border-neutral-500">
-                                <td class="whitespace-nowrap  px-6 py-4">#{{ $evento->folio }}</td>
-                                <td class="whitespace-nowrap  px-6 py-4 font-medium">{{ $evento->nombre }}</td>
-                                <td class="whitespace-nowrap  px-6 py-4">{{ date('d/m/Y', strtotime($evento->fecha_inicio)) }}</td>
+                                <td class="whitespace-nowrap px-6 py-4">#{{ $evento->folio }}</td>
+                                <td class="whitespace-pre-wrap px-6 py-4 font-medium">{{ $evento->nombre }}</td>
+                                <td class="whitespace-nowrap px-6 py-4">{{ date('d/m/Y', strtotime($evento->fecha_inicio)) }}</td>
                                 <td>
                                     <a href="{{ route('directivo.evidencia.show', ['evento' => $evento]) }}" 
                                         class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-500 focus:bg-indigo-500 active:bg-indigo-700">

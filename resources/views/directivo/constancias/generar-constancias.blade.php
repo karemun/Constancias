@@ -77,12 +77,12 @@ Generar Constancias
                     <tbody class="bg-slate-200">
                         @foreach ($evento->participante as $participante)
                             <tr class="border-b dark:border-neutral-500">
-                                <td class="whitespace-nowrap  px-6 py-4 font-medium">{{ $participante->nombre }}</td>
-                                <td class="whitespace-nowrap  px-6 py-4">{{ $participante->rol }}</td>
-                                <td class="whitespace-nowrap  px-6 py-4">{{ $participante->actividad }}</td>
-                                <td class="whitespace-nowrap  px-6 py-4">{{ $participante->puesto }}</td>
-                                <td class="whitespace-nowrap  px-6 py-4">{{ $participante->codigo }}</td>
-                                <td class="whitespace-nowrap  px-6 py-4">
+                                <td class="whitespace-nowrap px-6 py-4 font-medium">{{ $participante->nombre }}</td>
+                                <td class="whitespace-pre-wrap px-6 py-4">{{ $participante->rol }}</td>
+                                <td class="whitespace-pre-wrap px-6 py-4">{{ $participante->actividad }}</td>
+                                <td class="whitespace-nowrap px-6 py-4">{{ $participante->puesto }}</td>
+                                <td class="whitespace-nowrap px-6 py-4">{{ $participante->codigo }}</td>
+                                <td class="whitespace-nowrap px-6 py-4">
                                     <select name="certificado" id="certificado" class="bg-indigo-200 hover:bg-indigo-100 font-medium">
                                         <option value="reconocimiento">Reconocimiento</option>
                                         <option value="diploma">Diploma</option>

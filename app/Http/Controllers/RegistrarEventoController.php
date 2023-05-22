@@ -43,9 +43,9 @@ class RegistrarEventoController extends Controller
 
             //Validacion de los participantes
             'nombre_p.*' => 'required|max:100',
-            'rol_p.*' => 'required|max:100',
-            'actividad_p.*' => 'required|max:100',
-            'puesto_p.*' => 'required|max:100',
+            'rol_p.*' => 'required|max:250',
+            'actividad_p.*' => 'required|max:250',
+            'puesto_p.*' => 'required|max:250',
             'codigo_p.*' => 'nullable|min:9|max:10',
         ]);
 
